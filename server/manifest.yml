@@ -9,12 +9,12 @@
       - route: tctruc79.mybluemix.net/static
     memory: 128M
     buildpack: staticfile_buildpack
-    
+
 # Environment variables 
 env:
   env_type: PRODUCTION
   IBM_CLOUD_REGION: us-south
-  IBM_CLOUD_GROUP: default
+  IBM_CLOUD_GROUP: Default
   IBM_CLOUD_SPACE: djangoserver-space
   IBM_CLOUD_ORG: PhanNgoc
   MANIFEST_NAME: manifest.yml
