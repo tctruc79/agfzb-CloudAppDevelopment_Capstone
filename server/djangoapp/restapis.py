@@ -48,11 +48,11 @@ def post_request(url, json_payload, **kwargs):
 
 
 # Gets all dealers from the Cloudant DB with the Cloud Function get-dealerships
-def get_dealers_from_cf(url):
+def get_dealers_from_cf(url, **kwargs):
     results = []
     json_result = get_request(url)
     # Retrieve the dealer data from the response
-    dealers = json_result["body"]["rows"]
+    dealers = json_result["rows"]
     # For each dealer in the response
     for dealer in dealers:
         # Get its data in `doc` object
@@ -74,7 +74,8 @@ def get_dealer_by_id(url, dealer_id):
     json_result = get_request(url, dealerId=dealer_id)
 
     # Create a CarDealer object from response
-    dealer = json_result["entries"][0]
+    dealer = json_result[0]
+
     dealer_obj = CarDealer(address=dealer["address"], city=dealer["city"], full_name=dealer["full_name"],
                            id=dealer["id"], lat=dealer["lat"], long=dealer["long"],
                            short_name=dealer["short_name"],
@@ -88,7 +89,9 @@ def get_dealers_by_state(url, state):
     results = []
     # Call get_request with the state param
     json_result = get_request(url, state=state)
+
     dealers = json_result["body"]["docs"]
+
     # For each dealer in the response
     for dealer in dealers:
         # Create a CarDealer object with values in `doc` object
